@@ -58,7 +58,7 @@ export async function POST(req: NextRequest) {
 {
   "id": number,
   "text": string,
-  "dataTable": string // A markdown table that can be parseds"
+  "dataTable": string // A markdown table that can be parsed, if the question does have a table"
 }
 
 Do not include any markdown, code fences, or additional text outside of the JSON. Ensure the JSON is valid and only contains the list of questions with their corresponding data tables.`,
