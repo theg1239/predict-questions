@@ -62,7 +62,7 @@ function parseMarkdownTable(mdTable: string): React.ReactNode {
             {headers.map((header, idx) => (
               <th
                 key={idx}
-                className="px-2 py-1 border border-gray-300 bg-gray-200 text-left"
+                className="px-2 py-1 border border-gray-300 bg-black text-left"
               >
                 {header}
               </th>
