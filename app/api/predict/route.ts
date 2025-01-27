@@ -58,7 +58,7 @@ export async function POST(req: NextRequest) {
 {
   "id": number,
   "text": string,
-  "dataTable": string // A two-column Markdown table with headers "Age group (in years)" and "No of Members"
+  "dataTable": string // A markdown table that can be parseds"
 }
 
 Do not include any markdown, code fences, or additional text outside of the JSON. Ensure the JSON is valid and only contains the list of questions with their corresponding data tables.`,
