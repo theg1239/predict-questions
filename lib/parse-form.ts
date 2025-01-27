@@ -4,7 +4,7 @@ import { Readable, PassThrough } from "stream";
 import fs from "fs";
 import path from "path";
 
-const uploadDir = path.join(process.cwd(), "tmp_uploads");
+const uploadDir = path.join("/tmp", "tmp_uploads");
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
 }
