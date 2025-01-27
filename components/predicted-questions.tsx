@@ -17,20 +17,26 @@ function parseMarkdownTable(mdTable: string): React.ReactNode {
     .map((header) => header.trim())
     .filter(Boolean);
 
-  if (headers.length !== 2) {
-    return <p className="text-red-500">Table must have exactly two columns.</p>;
+  const separator = lines[1]
+    .split("|")
+    .map((sep) => sep.trim())
+    .filter(Boolean);
+  
+  if (separator.length < headers.length) {
+    return <p className="text-red-500">Invalid table format: Separator line does not match header columns.</p>;
   }
 
+  // Extract data rows
   const dataRows = lines.slice(2).map((line, index) => {
     const cells = line
       .split("|")
       .map((cell) => cell.trim())
       .filter(Boolean);
 
-    if (cells.length !== 2) {
+    if (cells.length !== headers.length) {
       return (
         <tr key={index}>
-          <td colSpan={2} className="px-2 py-1 border border-gray-300 text-red-500">
+          <td colSpan={headers.length} className="px-2 py-1 border border-gray-300 text-red-500">
             Invalid row format
           </td>
         </tr>
@@ -39,25 +45,33 @@ function parseMarkdownTable(mdTable: string): React.ReactNode {
 
     return (
       <tr key={index}>
-        <td className="px-2 py-1 border border-gray-300">{cells[0]}</td>
-        <td className="px-2 py-1 border border-gray-300">{cells[1]}</td>
+        {cells.map((cell, cellIndex) => (
+          <td key={cellIndex} className="px-2 py-1 border border-gray-300">
+            {cell}
+          </td>
+        ))}
       </tr>
     );
   });
 
   return (
-    <table className="border-collapse border border-gray-400 w-full text-sm">
-      <thead>
-        <tr>
-          {headers.map((header, idx) => (
-            <th key={idx} className="px-2 py-1 border border-gray-300 bg-black">
-              {header}
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>{dataRows}</tbody>
-    </table>
+    <div className="overflow-x-auto">
+      <table className="border-collapse border border-gray-400 w-full text-sm">
+        <thead>
+          <tr>
+            {headers.map((header, idx) => (
+              <th
+                key={idx}
+                className="px-2 py-1 border border-gray-300 bg-gray-200 text-left"
+              >
+                {header}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>{dataRows}</tbody>
+      </table>
+    </div>
   );
 }
 
