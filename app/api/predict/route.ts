@@ -53,7 +53,7 @@ export async function POST(req: NextRequest) {
         content: [
           {
             type: "text",
-            text: `Please analyze the content of the uploaded PDF documents and generate a list of potential exam questions in pure JSON format. The JSON should be an array of objects, each with the following structure:
+            text: `Please analyze the content of the uploaded PDF documents and generate a list of potential exam questions in pure JSON format that are different from the ones I send you but similar in type. The JSON should be an array of objects, each with the following structure:
 
 {
   "id": number,
